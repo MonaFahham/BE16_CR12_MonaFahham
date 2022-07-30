@@ -1,0 +1,91 @@
+<!-- when I am using ajax I dont need the file with the PHP extension. I can do it with HTML. if i read anythig from the DB, I can make an ajax-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Opportunity</title>
+</head>
+
+<button type="button" name="price_reduction" id="price_reduction" placeholder="price reduction...">Reduced Price</button>
+
+<!-- I will print my result of the search in this div -->
+<div id="result"></div>
+
+<!-- <form id="form">
+    <input type="text" id="fname" /><br />
+    <input type="text" id="lname" /><br />
+    <input type="email" id="email" /><br />
+    <input type="submit" id="submit" />
+</form> -->
+
+<script>
+    // my function is creating, while i am typing, then my function takes the value from the input(<input type="text" name="search" id="search" placeholder="search ..." />), make  a parameter that have a key: search and the value: data
+    document
+        .getElementById("price_reduction")
+        .addEventListener("click", searchForInfo);
+    // document.getElementById("form").addEventListener("submit", insertUser);
+
+    function searchForInfo(e) {
+        // console.log("test");
+        e.preventDefault(); //this prevents the page from refreshing after submitting
+        let data = document.getElementById("price_reduction").value; //saving the firstname value
+        // let params = `search=${data}`; //creating the parameters that i will pass to the ajax, for the POST method
+        // the key is search and the value is data
+
+        let request = new XMLHttpRequest(); //creating new request
+        // console.log(data);
+
+        // ***ajax***
+        request.open("GET", "search.php?price_reduction=" + data); //I wanna take value(data) from the DB, so I use GET.(if i wanna create, i use POST). connecting to the process.php file.
+        // after the ajax call, "search.php" file will be running
+
+        // *
+        // we can write: let params = `search=${data}`;
+        // and then request.open("GET", "search.php");
+        // or omit: let params = `search=${data}`;
+        // and write: request.open("GET", "search.php?search=" + data);
+        // *
+
+        // request.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); //setting header for POST method
+
+        request.onload = function() {
+            if (this.status == 200) {
+                //200 is good and ok
+                // console.log(this.responseText); //anything you echo in php file is called responseText.(e.g echo "No Result"; in search.php) so if you echo all the users in php, the response is all the users
+                document.getElementById("result").innerHTML = this.responseText;
+                // console.log(this.responseText);
+            }
+        };
+        request.send(); //send parameters to be further processed by php
+    }
+
+    // function insertUser(e) {
+    //     e.preventDefault(); //this prevents the page from refreshing after submitting
+    //     let fname = document.getElementById("fname").value; //saving the firstname value
+    //     let lname = document.getElementById("lname").value; //saving the firstname value
+    //     let email = document.getElementById("email").value; //saving the firstname value
+    //     let params = `fname=${fname}&lname=${lname}&email=${email}`; //creating the parameters for the POST method
+
+    //     let request = new XMLHttpRequest(); //creating new request
+    //     request.open("POST", "create.php"); //connecting to the process.php file
+    //     request.setRequestHeader(
+    //         "Content-type",
+    //         "application/x-www-form-urlencoded"
+    //     ); //setting header for POST method
+    //     request.onload = function() {
+    //         if (this.status == 200) {
+    //             alert(this.responseText);
+    //             searchForInfo(e);
+    //             // console.log(this.responseText);
+    //         }
+    //     };
+    //     request.send(params); //send parameters to be further processed by php
+    // }
+</script>
+</body>
+
+</html>
