@@ -43,6 +43,3 @@ mysqli_close($connect);
 // 2. next to it, choose the method: GET
 // 3. click send
 // 4. in the right column, we see an obj(with "status", "message", "data")
-
-
-

@@ -32,7 +32,7 @@ if(mysqli_num_rows($result)>0){
                   <p class='card-text'><b>Latitude: </b>".$row['latitude']."</p>
                   <p class='card-text'><b>Longitude: </b>".$row['longitude']."</p>
                 </div>
-                <div class='col-12 nsl'>
+                <div class='col-12'>
                 <a href='update.php?real_estate_id=".$row['real_estate_id']."'><button class='button btn btn-warning ms-5' type='button'>Edit</button></a>
                 <a href='delete.php?real_estate_id=".$row['real_estate_id']."'><button class='button button2 btn btn-danger' type='button'>Delete</button></a>
             </div>
